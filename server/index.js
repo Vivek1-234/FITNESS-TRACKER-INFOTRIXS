@@ -12,7 +12,8 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const userRouter = require("./routers/userRouter");
 const cloudinary = require("cloudinary").v2;
-// const path = require("path");
+const path = require("path");
+
 
 dotenv.config("./.env");
 
@@ -55,16 +56,16 @@ app.use("/user", userRouter);
 // return res.send(success(200, 'Ok from server'));
 // });
 
-// app.use(express.static(path.join(__dirname, "./client/build")));
+app.use(express.static(path.join(__dirname, "../client/build")));
 
-// app.get("*", function (_, res) {
-//   res.sendFile(
-//     path.join(__dirname, "./client/build/index.html"),
-//     function (error) {
-//       res.status(500).send(error);
-//     }
-//   );
-// }); 
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html"),
+    function (error) {
+      res.status(500).send(error);
+    }
+  );
+}); 
 
 const PORT = process.env.PORT || 4001;
 
